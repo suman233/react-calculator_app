@@ -2,7 +2,9 @@ import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 import "./App.css";
 import "./Calculator.css"; // Optional, for styling
 import { useEffect, useState } from "react";
+import { all, create } from "mathjs";
 
+const math = create(all);
 function App() {
   const [displayValue, setDisplayValue] = useState("");
   const appendNumber = (number) => {
@@ -27,7 +29,7 @@ function App() {
 
   const compute = () => {
     try {
-      setDisplayValue((prev) => eval(prev).toString());
+      setDisplayValue((prev) => math.evaluate(prev).toString());
     } catch {
       setDisplayValue("Error");
     }
@@ -80,23 +82,38 @@ function App() {
             {displayValue === "" ? 0 : displayValue}
           </Typography>
         </Box>
-        <Grid container spacing={1} className="buttons" sx={{justifyContent:'space-around', justifyItems:'center'}}>
-          {["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "+"].map((label) => (
-            <Grid item xs={3} key={label}>
-              <Button variant="contained" fullWidth onClick={() => appendNumber(label)}>
-                {label}
-              </Button>
-            </Grid>
-          ))}
-          
+        <Grid
+          container
+          spacing={1}
+          className="buttons"
+          sx={{ justifyContent: "space-around", justifyItems: "center" }}
+        >
+          {["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "+"].map(
+            (label) => (
+              <Grid item xs={3} key={label}>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={() => appendNumber(label)}
+                >
+                  {label}
+                </Button>
+              </Grid>
+            )
+          )}
+
           {["-", "*", "/"].map((label) => (
             <Grid item xs={3} key={label}>
-              <Button variant="contained" fullWidth onClick={() => appendNumber(label)}>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={() => appendNumber(label)}
+              >
                 {label}
               </Button>
             </Grid>
           ))}
-         <Grid item xs={3}>
+          <Grid item xs={3}>
             <Button variant="contained" fullWidth onClick={clearDisplay}>
               C
             </Button>
