@@ -73,7 +73,12 @@ function App() {
     //   </div>
     // </div>
     <Container maxWidth="xs">
-      <Typography variant="h3" align="center" gutterBottom>
+      <Typography
+        variant="h4"
+        sx={{ fontWeight: "bold", m: 2 }}
+        align="center"
+        gutterBottom
+      >
         Calculator App
       </Typography>
       <Paper elevation={3} className="calculator">
@@ -130,6 +135,10 @@ function App() {
           </Grid>
         </Grid>
       </Paper>
+      <footer style={{display:'flex',}}>
+        <p style={{padding:3}}>Created by Suman Kundu</p>
+        <p style={{ padding:3}}>Designed By SKDesign Studio</p>
+      </footer>
     </Container>
   );
 }
